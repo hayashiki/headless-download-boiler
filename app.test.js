@@ -1,7 +1,7 @@
 import request from 'supertest'
 import {app} from './app.js'
 
-describe(`Hello world`, () => {
+describe(`Get PDF`, () => {
   test(`GET`, (done) => {
     request(app)
         .get(`/`)

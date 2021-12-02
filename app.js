@@ -4,10 +4,8 @@ import  path, { resolve } from 'path'
 import fs from 'fs'
 
 const __dirname =  path.dirname(new URL(import.meta.url).pathname)
-
 export const app = express();
 const targetURL = "https://hayashiki.github.io/dummy-static-site/"
-let gcs;
 
 // Expressをたちあげる、メイン処理となる
 app.use(async (req, res) => {
@@ -46,12 +44,6 @@ app.use(async (req, res) => {
     }
 });
 
-const server = app.listen(process.env.PORT || 8080, err => {
-    if (err) return console.error(err);
-    const port = server.address().port;
-    console.info(`App listening on port ${port}`);
-});
-
 // Download PDF
 async function getPDF() {
     let result = false;
@@ -87,7 +79,9 @@ async function getPDF() {
         result = false;
     }
     finally {
+        console.log(`[getPDF] close`)
         await browser.close();
+        // await page.Close();
         return result
     }
 }
