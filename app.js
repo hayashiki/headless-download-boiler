@@ -54,6 +54,7 @@ async function getPDF() {
             behavior : 'allow',
             downloadPath: resolve(__dirname,'.','downloads')
         });
+        console.info("[getPDF] download path", resolve(__dirname,'.','downloads'))
         // ダウンロードページへ遷移
         await page.goto(targetURL)
         console.info("[getPDF] goto targetURL")
