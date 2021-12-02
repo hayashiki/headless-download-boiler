@@ -4,7 +4,7 @@
   "description": "puppeteer on Cloud Run / GitHub Actions",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "node server.js",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest app.test.js"
   },
   "type": "module",
