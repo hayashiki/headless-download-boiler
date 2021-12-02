@@ -1,0 +1,25 @@
+{
+  "name": "headless-downloader-boiler",
+  "version": "1.0.0",
+  "description": "puppeteer on Cloud Run / GitHub Actions",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest app.test.js"
+  },
+  "type": "module",
+  "keywords": [
+    "puppeteer"
+  ],
+  "author": "hayashiki <masayuki.hayashida.app@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.4",
+    "node-fetch": "^2.6.1",
+    "puppeteer": "^7.1.0"
+  },
+  "devDependencies": {
+    "jest": "^27.4.3",
+    "supertest": "^6.1.6"
+  }
+}

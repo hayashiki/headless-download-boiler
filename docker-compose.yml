@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  app:
+    build: .
+    command: npm start
+    ports:
+      - 8080:8080
+    volumes:
+#      - ./downloads:/app/downloads/
+      - .:/app
+      - trick:/app/node_modules
+#      - ./credentials:/credentials/google-app-credentials
+
+    environment:
+      - PORT=8080
+volumes:
+  trick:
