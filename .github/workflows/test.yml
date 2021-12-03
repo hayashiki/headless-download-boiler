@@ -27,14 +27,22 @@ jobs:
         with:
           node-version: 16.x
 
-      - name: Install
-        run: yarn install --frozen-lockfile
+#      - name: Install
+#        run: yarn install --frozen-lockfile
+#
+#      - name: Test
+#        run: yarn test
 
       - name: Test
-        run: yarn test
+        run: docker-compose run --rm app yarn test
 
-#      - name: Test
-#        run: docker-compose run --rm app yarn test
+      - name: Test
+        run: docker-compose run --rm app ls
+
+      - name: Test
+        run: docker-compose run --rm app ls ./downloads
+
+
 
       - name: List files in the repository
         run: |
