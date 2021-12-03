@@ -50,7 +50,7 @@ async function getPDF() {
         await page.click('#pdf1');
         console.info("[getPDF] download click")
         // 念の為3秒待つ
-        await page.waitForTimeout(3000)
+        await page.waitForTimeout(10000)
         console.info("[getPDF] download finished")
         result = true;
 
