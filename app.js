@@ -11,35 +11,22 @@ const targetURL = "https://hayashiki.github.io/dummy-static-site/"
 app.use(async (req, res) => {
     console.info("[main] version:" + process.env.npm_package_version)
 
-    // 並行で処理すると負荷がかかりそうなので逐次処理している、特に早く終わる必要もないので
-    const res1 = await getPDF()
-
-    console.log(`[main] result:${res1}`)
-    // const filename = new Date().toISOString() + ".pdf";
-
+    const result = await getPDF()
+    console.info(`[main] result:${result}`)
     const files = fs.readdirSync(resolve(__dirname,'.','downloads'))
     const pdfFiles = files.filter(f => f.includes('.pdf'))
 
-    const results = [];
     pdfFiles.forEach(fileName => {
-        const targetFullpath = resolve(__dirname,'.', 'downloads' + '/' + fileName)
-        const suffix = new Date(Date.now()).toISOString().substr(0, 10)
-        console.log(`[download] filename: ${fileName}_${suffix}`);
-        // writeToGcs(targetFullpath, pdfBucket, `${prefix}_${fileName}`)
-        // results.push(`${prefix}_${fileName}`);
+        const targetPath = resolve(__dirname,'.', 'downloads' + '/' + fileName)
+        const prefix = new Date(Date.now()).toISOString().substr(0, 10)
+        // ファイル名を変更して各種ストレージサービスにアップロードするならこのあたりで処理する
+        console.info(`[main] filename: ${prefix}_${fileName}, path: ${targetPath}`);
     })
-    console.log(`results: ${results}`)
-    const strResult = results.join(',');
-
-    if (res1) {
-        // driveと同期するGo側の処理でSlack通知する
-        // await sendSlack(`Succeeded ${strResult}`)
-        console.log(`Succeeded ${strResult}`)
+    if (result) {
+        console.info(`[main] Succeeded`)
         res.status(200).send("OK");
     } else {
-        // driveと同期するGo側の処理でSlack通知する
-        // await sendSlack("Failed!!")
-        console.log(`Failed ${strResult}`)
+        console.info(`[main] Failed`)
         res.status(500).send("NG");
     }
 });
@@ -72,9 +59,8 @@ async function getPDF() {
         // console.log(html);
 
         // For debug
-        // const filePath = '/tmp/amex_screenshot.png'
+        // const filePath = '/tmp/screenshot.png'
         // await page.screenshot({ path: filePath, fullPage: true });
-        // await writeToGcs(filePath, pdfBucket, "amex_screenshot.png")
     } catch (e) {
         console.error(`[getPDF] err: ${e}`)
         result = false;
@@ -82,7 +68,6 @@ async function getPDF() {
     finally {
         console.log(`[getPDF] close`)
         await browser.close();
-        // await page.Close();
         return result
     }
 }

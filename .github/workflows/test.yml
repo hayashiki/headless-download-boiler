@@ -27,14 +27,17 @@ jobs:
         with:
           node-version: 16.x
 
-      - name: Install
-        run: yarn install --frozen-lockfile
+#      - name: Install
+#        run: yarn install --frozen-lockfile
+#
+#      - name: Test
+#        run: yarn test
 
       - name: Test
-        run: yarn test
+        run: docker-compose run --rm app yarn test
 
       - name: Archive production artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: UnitTest report
+          name: Download Files
           path: downloads

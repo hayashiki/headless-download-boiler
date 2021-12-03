@@ -25,8 +25,8 @@ WORKDIR /app
 
 COPY --chown=pptruser:pptruser package*.json ./
 
-RUN npm install
+RUN yarn install
 
 COPY --chown=pptruser:pptruser . .
 
-CMD ["npm", "run", "start"]
+CMD ["yarn", "start"]
