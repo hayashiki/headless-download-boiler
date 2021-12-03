@@ -9,7 +9,6 @@ services:
 #      - ./downloads:/app/downloads/
       - .:/app
       - trick:/app/node_modules
-#      - ./credentials:/credentials/google-app-credentials
 
     environment:
       - PORT=8080

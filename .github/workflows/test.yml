@@ -14,7 +14,7 @@ jobs:
       - name: Get yarn cache
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
-      - uses: actions/checkout@v2
+
       - uses: actions/cache@v2
         with:
           path: ${{ steps.yarn-cache.outputs.dir }}
@@ -35,6 +35,10 @@ jobs:
 
       - name: Test
         run: docker-compose run --rm app yarn test
+
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
 
       - name: Archive production artifacts
         uses: actions/upload-artifact@v2
